@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasksapp
+  labels:
+    app: tasksapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tasksapp
+  template:
+    metadata:
+      labels:
+        app: tasksapp
+    spec:
+      containers:
+      - name: tasksapp
+        image: maddys96/tasksapp-python:1.0.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block body %}
+     <div class="container mt-3">
+         <h2>Add a Todo</h2>
+        <form action="/" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Todo Title</label>
+              <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" required>
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="form-label">Todo Description</label>
+              <input type="text" class="form-control" id="desc" name="desc" required>
+            </div>
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
+          </form>
+        <div class="container my-3">
+            <h2>Your Todos</h2>
+            {% if t.count_documents({})==0 %}
+            <div class="alert alert-dark" role="alert">
+              No todos left, add one!
+            </div>
+            {% else %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}      
+                  <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{todo['title']}}</td>
+                    <td>{{todo['desc']}}</td>
+                    <td>
+                      <a class="btn btn-outline-dark btn-sm mx-2" href="/{{todo['_id']}}/update">Update</button>
+                      <a class="btn btn-outline-dark btn-sm mx-2" href="/{{todo['_id']}}/delete">Delete</button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+              {% endif %}
+        </div>
+
+     </div>
+{% endblock body %}
