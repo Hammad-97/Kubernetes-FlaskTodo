@@ -37,6 +37,7 @@ def update(id):
         title = request.form['title']
         desc = request.form['desc']
         todos.update_one({"_id": ObjectId(id)},{"$set":{ "title":title, "desc":desc}}, True)
+        print(request.form)
         return redirect(url_for("home"))
     todo= todos.find_one({"_id": ObjectId(id)})
     return render_template('update.html', todo=todo)
