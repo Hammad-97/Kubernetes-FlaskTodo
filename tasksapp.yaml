@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tasksapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tasksapp
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tasksapp
-        image: maddys96/tasksapp-python:1.0.0
+        image: gcr.io/todo-347907/my_app-image:v1
         resources:
           limits:
             memory: "128Mi"
