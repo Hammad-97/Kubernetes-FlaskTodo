@@ -22,6 +22,7 @@ def home():
         title = request.form['title']
         desc = request.form['desc']
         todos.insert_one({'title':title, 'desc':desc})
+        print(request.form)
         return redirect(url_for('home'))
     all_todos = todos.find()
     return render_template('index.html', todos=all_todos, t= todos)
